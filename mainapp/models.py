@@ -18,7 +18,7 @@ default a user is NU.
 class User(AbstractUser):
     is_admin_u = models.BooleanField(default=False)
     is_manager = models.BooleanField(default = False)
-    is_user =models.BooleanField(default = True)
+    is_user =models.BooleanField(default = False)
     full_name = models.CharField(max_length=100)
     email = models.EmailField(max_length=254)
     

@@ -10,6 +10,20 @@
 
 <body style="background-color: darkgreen;color:white">
     Sheryl it works
+
+    {% if user.is_authenticated %}
+    <a class="nav-link text-white dropdown-toggle" href="{% url 'logout'%}" id="navbardrop" data-toggle="dropdown">
+        <b>Logout as{{ request.user.username}}</b>
+    </a>
+    {% else %}
+    <a class="nav-link text-white dropdown-tggle" href="{% url 'login' %}" id="navbardop" data-toggle="drdown">
+        login</a> or signup as <br>
+    <a href="{% url 'admin_signup'%}">Admin</a><br>
+    <a href="{% url 'manager_signup'%}">Manager</a><br>
+    <a href="{% url 'user_signup'%}">User</a>
+    {%endif %}
+
+
 </body>
 
 </html>

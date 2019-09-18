@@ -15,3 +15,29 @@ class Admin_uSignUpForm(UserCreationForm):
         if commit:
             user.save()
         return user
+    
+class ManagerSignUpForm(UserCreationForm):
+    class Meta(UserCreationForm.Meta):
+        model = User
+        fields = ( 'full_name','email','username', 'password1', 'password2', )
+        
+    @transaction.atomic
+    def save(self, commit=True):
+        user = super().save(commit=False)
+        user.is_manager = True
+        if commit:
+            user.save()
+        return user
+    
+class UserSignUpForm(UserCreationForm):
+    class Meta(UserCreationForm.Meta):
+        model = User
+        fields = ( 'full_name','email','username', 'password1', 'password2', )
+        
+    @transaction.atomic
+    def save(self, commit=True):
+        user = super().save(commit=False)
+        user.is_manager = True
+        if commit:
+            user.save()
+        return user

@@ -14,7 +14,7 @@ from django.views.generic import (CreateView, DeleteView, DetailView, ListView, 
 class Admin_uSignUpView(CreateView):
     model = User
     form_class = Admin_uSignUpForm
-    template_name = 'auths/signup_form.html'
+    template_name = 'registration/signup_form.html'
 
     def get_context_data(self, **kwargs):
         kwargs['user_type'] = 'admin_u'
@@ -25,3 +25,6 @@ class Admin_uSignUpView(CreateView):
         # login(self.request, user)
         return redirect('a_home')
 
+def home(request):
+    return render(request,'admin/admin_home.html',{})
+    
