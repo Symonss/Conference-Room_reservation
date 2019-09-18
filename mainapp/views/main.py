@@ -9,5 +9,5 @@ from django.utils import timezone
 
 
 def home(request):
-    return render(request,'mainapp/home.html',{})
+    return render(request,'app/index.html',{})
     

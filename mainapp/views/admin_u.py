@@ -26,5 +26,5 @@ class Admin_uSignUpView(CreateView):
         return redirect('a_home')
 
 def home(request):
-    return render(request,'admin/admin_home.html',{})
+    return render(request,'app/admin_home.html',{})
     
