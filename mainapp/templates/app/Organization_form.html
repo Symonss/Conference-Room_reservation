@@ -1,6 +1,6 @@
 {% extends "app/base_site.html" %}
 {% load crispy_forms_tags %}
-{% block title %} singup {% endblock title %}
+{% block title %} Login {% endblock title %}
 
 {% block stylesheets %}
 {{ block.super }}
@@ -13,7 +13,7 @@
 {% block body %}
 <div class="row" style="margin-left: 100px">
     <div class="col-md-8 col-sm-10 col-12">
-        <h2>Add a {{ user_type }}</h2>
+        <h2>{{ user_type }}</h2>
         <form method="post" novalidate>
             {% csrf_token %}
             <input type="hidden" name="next" value="{{ next }}">

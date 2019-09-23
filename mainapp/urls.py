@@ -7,6 +7,7 @@ urlpatterns = [
     path('mangers/home', manager.home, name = 'm_home'),
     path('admins/home', admin_u.home, name = 'a_home'),
     path('user/home', user.home, name = 'u_home'),
+    path('org/create', admin_u.OrganizationCreateView.as_view(), name = 'org_c'),
     
 
   

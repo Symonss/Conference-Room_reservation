@@ -10,7 +10,7 @@ urlpatterns = [
     path('', include('mainapp.urls')),
     path('admin/', admin.site.urls),
     path('accounts/', include('django.contrib.auth.urls')),
-    path('accounts/signup/admin/', admin_u.Admin_uSignUpView.as_view(), name='admin_signup'),
+    path('accounts/signup/admin/<int:pk>', admin_u.Admin_uSignUpView.as_view(), name='admin_signup'),
     path('accounts/signup/manager/', manager.ManagerSignUpView.as_view(), name='manager_signup'),
     path('accounts/signup/user/', user.UserSignUpView.as_view(), name='user_signup'),
 ]

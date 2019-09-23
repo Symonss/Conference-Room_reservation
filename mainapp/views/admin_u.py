@@ -2,7 +2,7 @@ from django.contrib.auth import login
 from django.shortcuts import redirect
 from ..forms import Admin_uSignUpForm
 from django.shortcuts import render
-from ..models import User
+from ..models import User, Organization
 # from django.utils.decorators import method_decorator
 # from ..decorators import department_required
 from django.urls import reverse_lazy
@@ -21,6 +21,9 @@ class Admin_uSignUpView(CreateView):
         return super().get_context_data(**kwargs)
 
     def form_valid(self, form):
+        user = form.save(commit=False)
+        organization = Organization.objects.get(pk=self.kwargs['pk'])
+        user.org_owner = organization
         user = form.save()
         # login(self.request, user)
         return redirect('a_home')
@@ -28,3 +31,11 @@ class Admin_uSignUpView(CreateView):
 def home(request):
     return render(request,'app/admin_home.html',{})
     
+class OrganizationCreateView(CreateView):
+    model = Organization
+    fields = '__all__'
+    template_name = 'app/Organization_form.html'
+    def form_valid(self, form):
+        org = form.save(commit=False)
+        org.save()
+        return redirect('admin_signup', org.pk)
