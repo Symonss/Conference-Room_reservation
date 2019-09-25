@@ -22,7 +22,7 @@ class Organization(models.Model):
     location = models.CharField(max_length= 100)
     
     def __str__(self):
-        return self.track_number
+        return self.org_name
 
 class User(AbstractUser):
     is_admin_u = models.BooleanField(default=False)

@@ -1,0 +1,25 @@
+{% extends "app/base_site.html" %}
+{% load crispy_forms_tags %}
+{% block title %} Login {% endblock title %}
+
+{% block stylesheets %}
+{{ block.super }}
+<!-- Animate.css -->
+<link href="/static/vendors/animate.css/animate.min.css" rel="stylesheet">
+{% endblock stylesheets %}
+
+{% block body_class %}Add form{% endblock body_class %}
+
+{% block body %}
+<div class="row" style="margin-left: 100px">
+    <div class="col-md-8 col-sm-10 col-12">
+        <h2>{{ user_type }}</h2>
+        <form method="post" novalidate>
+            {% csrf_token %}
+            <input type="hidden" name="next" value="{{ next }}">
+            {{ form|crispy }}
+            <button type="submit" class="btn btn-success">Submit</button>
+        </form>
+    </div>
+</div>
+{% endblock body %}
