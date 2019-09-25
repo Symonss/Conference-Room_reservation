@@ -2,7 +2,7 @@ from django.contrib.auth import login
 from django.shortcuts import redirect
 from ..forms import ManagerSignUpForm
 from django.shortcuts import render
-from ..models import User
+from ..models import User, Organization
 # from django.utils.decorators import method_decorator
 # from ..decorators import department_required
 from django.urls import reverse_lazy
@@ -21,6 +21,8 @@ class ManagerSignUpView(CreateView):
         return super().get_context_data(**kwargs)
 
     def form_valid(self, form):
+        user = form.save(commit=False)
+        organization_in = Organization.objects.get(pk=self.kwargs['pk'])
         user = form.save()
         # login(self.request, user)
         return redirect('m_home')

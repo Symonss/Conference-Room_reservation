@@ -30,8 +30,8 @@ class User(AbstractUser):
     is_user =models.BooleanField(default = False)
     full_name = models.CharField(max_length=100)
     email = models.EmailField(max_length=254)
-    org_owner = models.ForeignKey(Organization,on_delete=models.CASCADE)
-
+    org_owner = models.ForeignKey(Organization,on_delete=models.CASCADE, null = True, blank = True, related_name='my_Porgs')
+    organization_in = models.ForeignKey(Organization,on_delete=models.CASCADE, null = True, blank = True, related_name='my_orgs')
 
 
 class Halls(models.Model):
