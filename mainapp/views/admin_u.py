@@ -26,7 +26,7 @@ class Admin_uSignUpView(CreateView):
         user.org_owner = organization
         user.organization_in = organization
         user = form.save()
-        # login(self.request, user)
+        login(self.request, user)
         return redirect('a_home')
 
 def home(request):
