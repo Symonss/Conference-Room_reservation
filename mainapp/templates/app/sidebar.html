@@ -29,10 +29,10 @@
         </li>
         <li><a><i class="fa fa-edit"></i> Actions <span class="fa fa-chevron-down"></span></a>
           <ul class="nav child_menu">
-            <li><a href="form.html">Add Conference Room</a></li>
-            <li><a href="form_advanced.html">Add a Manager</a></li>
-            <li><a href="form_validation.html">Add a User</a></li>
-
+            <li><a href="{% url 'hall_c' %}">Add Conference Room</a></li>
+            <li><a href="http://127.0.0.1:8000/accounts/signup/manager/{{request.user.org_owner.pk}}">Add a Manager</a>
+            </li>
+            <li><a href="http://127.0.0.1:8000/accounts/signup/user/{{request.user.org_owner.pk}}">Add a User</a></li>
           </ul>
         </li>
         <li><a><i class="fa fa-bar-chart-o"></i> Info <span class="fa fa-chevron-down"></span></a>
