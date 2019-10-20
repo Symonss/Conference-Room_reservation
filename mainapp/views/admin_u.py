@@ -2,7 +2,7 @@ from django.contrib.auth import login
 from django.shortcuts import redirect
 from ..forms import Admin_uSignUpForm
 from django.shortcuts import render
-from ..models import User, Organization
+from ..models import User
 # from django.utils.decorators import method_decorator
 # from ..decorators import department_required
 from django.urls import reverse_lazy
@@ -22,9 +22,6 @@ class Admin_uSignUpView(CreateView):
 
     def form_valid(self, form):
         user = form.save(commit=False)
-        organization = Organization.objects.get(pk=self.kwargs['pk'])
-        user.org_owner = organization
-        user.organization_in = organization
         user = form.save()
         login(self.request, user)
         return redirect('a_home')
