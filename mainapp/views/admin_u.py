@@ -32,3 +32,11 @@ class Admin_uSignUpView(CreateView):
 def home(request):
     return render(request,'app/admin_home.html',{})
     
+class OrganizationCreateView(CreateView):
+    model = Organization
+    fields = '__all__'
+    template_name = 'app/Organization_form.html'
+    def form_valid(self, form):
+        org = form.save(commit=False)
+        org.save()
+        return redirect('admin_signup', org.pk)
