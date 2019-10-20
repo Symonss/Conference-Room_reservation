@@ -5,11 +5,48 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>{% block title %}ICT Support{% endblock %}</title>
-
+    <title>{% block title %}BRR{% endblock %}</title>
+    <link href="https://fonts.googleapis.com/css?family=Clicker+Script" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="{% static 'vendor/fontello-2f186091/css/fontello.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/pp.css' %}">
+    <link rel="stylesheet" type="text/css" href=" {% static 'css/home.css' %}">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 </head>
 
 <body>
+ {% comment %} navbar {% endcomment %}
+    <nav class="navbar navbar-expand-md bg-info text-white w3-card-4 navbar-dark">
+        <a class="navbar-brand" href="#">MOH BRR</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="collapsibleNavbar">
+            <ul class="navbar-nav ml-auto">
+
+                <!-- Dropdown -->
+                <li class="nav-item dropdown">
+                    {% if user.is_authenticated %}
+                    <a class="nav-link text-white dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+                        <b>{{ request.user.username}}</b>
+                    </a>
+                    {% else %}
+                    <a class="nav-link dropdown-tggle" href="{% url 'login' %}" id="navbardop" data-toggle="drdown">
+                        login | Signup</a>
+                    {%endif %}
+
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="#">Profile</a>
+                        <a class="dropdown-item" href="{% url 'logout' %}">Logout</a>
+                    </div>
+                </li>
+
+
+            </ul>
+        </div>
+    </nav>
+    {% comment %} <! -- end_navbar --> {% endcomment %}
     home base
     {%block content%}
     {% endblock%}
