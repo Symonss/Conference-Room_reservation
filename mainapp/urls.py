@@ -7,7 +7,7 @@ urlpatterns = [
     path('mangers/home', manager.home, name = 'm_home'),
     path('admins/home', admin_u.home, name = 'a_home'),
     path('user/home', user.home, name = 'u_home'),
-  
+    path('reservation/new/', main.CreatesView.as_view(), name='reservation_new'),
     path('room/create', main.HallCreateView.as_view(), name = 'hall_c'),
     
 

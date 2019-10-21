@@ -1,7 +1,8 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.db import transaction
-from mainapp.models import User
+from mainapp.models import User, Reservation
+from datetimepicker.widgets import DateTimePicker
 
 class Admin_uSignUpForm(UserCreationForm):
     class Meta(UserCreationForm.Meta):
@@ -41,3 +42,4 @@ class UserSignUpForm(UserCreationForm):
         if commit:
             user.save()
         return user
+
