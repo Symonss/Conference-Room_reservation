@@ -22,7 +22,6 @@ class ManagerSignUpView(CreateView):
 
     def form_valid(self, form):
         user = form.save(commit=False)
-        organization_in = Organization.objects.get(pk=self.kwargs['pk'])
         user = form.save()
         # login(self.request, user)
         return redirect('m_home')

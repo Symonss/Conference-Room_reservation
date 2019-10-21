@@ -6,15 +6,6 @@ import datetime
 import random
 from django.urls import reverse
 
-"""
-Users of the system:
-    1. The admin, Admin will have all rights and previlages
-    2. Conference room managers, will be responsible for the rooms 
-    3.Normal users, Responsible only for bookings
-I abstact the user class and add Booloan flugs to separate user types such 
-that when user is registering they are either set as true or False.by 
-default a user is NU.
-"""
 
 class User(AbstractUser):
     is_admin_u = models.BooleanField(default=False)
@@ -31,5 +22,18 @@ class Halls(models.Model):
         
     def __str__(self):
         return self.hall_name
+
+class Reservation(models.Model):
+    title = models.CharField(max_length = 100)
+    start_date_time = models.DateTimeField()
+    end_date_time = models.DateTimeField()
+    hall = models.ForeignKey(Halls, on_delete = models.CASCADE)
+    created_by = models.ForeignKey(User, on_delete = models.CASCADE)
+    is_accepted = models.BooleanField(default = False)
+    is_complete = models.BooleanField(default = False)
+
+    def get_absolute_url(self):
+        return reverse('home')
+    
 
     
