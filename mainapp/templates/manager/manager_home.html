@@ -1,0 +1,60 @@
+{% extends 'base.html'%}
+
+{% block content%}
+
+<div class="container-fluid">
+
+    <div class="row">
+        <div class="col-sm-2 center" style="background-color:lavender;">
+
+            <div class="continer ">
+                <h2>Room II manager</h2>
+                <div class="btn-group-vertical">
+                    <a type="button" class="btn  btn-block" style="background-color:darkcyan"
+                        href="{% url 'reservation_new' %}"><span style="color: white;font-size:24px">
+                            Create a reservation</span></a>
+                    <button type="button" class="btn btn-block btn-primary">Update Hall</button>
+                    <button type="button" class="btn btn-primary">View Reservations</button>
+                    <button type="button" class="btn btn-primary">Logout</button>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="col-sm-10" style="background-color:lavenderblush;">
+
+            <div class="container">
+                <h2>Recent Reservations</h2>
+
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Firstname</th>
+                            <th>Lastname</th>
+                            <th>Email</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>John</td>
+                            <td>Doe</td>
+                            <td>john@example.com</td>
+                        </tr>
+                        <tr>
+                            <td>Mary</td>
+                            <td>Moe</td>
+                            <td>mary@example.com</td>
+                        </tr>
+                        <tr>
+                            <td>July</td>
+                            <td>Dooley</td>
+                            <td>july@example.com</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock%}
