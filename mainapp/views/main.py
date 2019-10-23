@@ -43,4 +43,16 @@ class CreatesView(generic.edit.CreateView):
         form.fields['end_date_time'].widget = DateTimePickerInput()
         return form
 
+    
+def reservation_detail(request, pk):
+    reservation = get_object_or_404(Reservation, pk=pk)
+    return render(request, 'app/reservation_detail.html', {'reservation': reservation})
+
+
+def reservation_complete(request, pk ,):
+    reservation = get_object_or_404(Reservation, pk=pk)
+    reservation.is_complete = True
+    reservation.save()
+    # ticket.mark_closed(closer)
+    return redirect('reservation_detail', pk=pk)
 

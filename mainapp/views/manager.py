@@ -2,13 +2,12 @@ from django.contrib.auth import login
 from django.shortcuts import redirect
 from ..forms import ManagerSignUpForm
 from django.shortcuts import render
-from ..models import User
+from ..models import User, Reservation, Halls
 # from django.utils.decorators import method_decorator
 # from ..decorators import department_required
 from django.urls import reverse_lazy
 from django.contrib.auth.decorators import login_required
 from django.views.generic import (CreateView, DeleteView, DetailView, ListView, UpdateView)
-
 
 
 class ManagerSignUpView(CreateView):
@@ -27,5 +26,9 @@ class ManagerSignUpView(CreateView):
         return redirect('m_home')
 
 def home(request):
-    return render(request,'manager/manager_home.html',{})
+    hall_in = Halls.objects.get(hall_manager = request.user.pk)
+    reservations = Reservation.objects.filter(hall = hall_in.pk).order_by('-start_date_time')
+
+   
+    return render(request,'manager/manager_home.html',{'reservations':reservations})
     

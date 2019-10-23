@@ -14,6 +14,8 @@ class User(AbstractUser):
     full_name = models.CharField(max_length=100)
     email = models.EmailField(max_length=254)
     
+    def __str__(self):
+        return self.full_name
 
 class Halls(models.Model):
     hall_name = models.CharField(max_length= 100)

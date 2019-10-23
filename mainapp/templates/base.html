@@ -16,7 +16,7 @@
 </head>
 
 <body>
- {% comment %} navbar {% endcomment %}
+    {% comment %} navbar {% endcomment %}
     <nav class="navbar navbar-expand-md bg-info text-white w3-card-4 navbar-dark">
         <a class="navbar-brand" href="#">MOH BRR</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
@@ -47,10 +47,10 @@
         </div>
     </nav>
     {% comment %} <! -- end_navbar --> {% endcomment %}
-    
-    {%block content%}
-    {% endblock%}
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+
+        {%block content%}
+        {% endblock%}
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
             integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
             crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
@@ -64,6 +64,22 @@
                 $('[data-toggle="tooltip"]').tooltip();
             })
         </script>
+        <!-- For table to be clickable -->
+        <script type="text/javascript">
+            $(function () {
+                $('[data-toggle="tooltip"]').tooltip();
+            })
+        </script>
+
+        <!-- for table row -->
+        <script>
+            jQuery(document).ready(function ($) {
+                $('[data-href]').click(function () {
+                    window.location = $(this).data("href");
+                });
+            });
+        </script>
+        <!-- table clickable   -->
 </body>
 
 </html>

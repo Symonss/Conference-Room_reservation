@@ -9,7 +9,9 @@ urlpatterns = [
     path('user/home', user.home, name = 'u_home'),
     path('reservation/new/', main.CreatesView.as_view(), name='reservation_new'),
     path('room/create', main.HallCreateView.as_view(), name = 'hall_c'),
-    
+
+    path('reservation/<int:pk>/', main.reservation_detail, name='reservation_detail'),
+    path('Reservation/<pk>/complete/', main.reservation_complete, name='reservation_complete'),
 
   
 ]

@@ -5,7 +5,7 @@
 <div class="container-fluid">
 
     <div class="row">
-        <div class="col-sm-2 center" style="background-color:lavender;">
+        <div class="col-sm-3 center" style="background-color:lavender;">
 
             <div class="continer ">
                 <h2>Room II manager</h2>
@@ -21,37 +21,51 @@
 
         </div>
 
-        <div class="col-sm-10" style="background-color:lavenderblush;">
+        <div class="col-sm-9" style="background-color:lavenderblush;">
 
             <div class="container">
                 <h2>Recent Reservations</h2>
+                <!-- table for reservations  -->
 
-                <table class="table table-bordered">
+                <table class="table table-hover">
                     <thead>
                         <tr>
-                            <th>Firstname</th>
-                            <th>Lastname</th>
-                            <th>Email</th>
+                            <th>#</th>
+                            <th>Title</th>
+                            <th>Start</th>
+                            <th>Created By</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr>
-                            <td>John</td>
-                            <td>Doe</td>
-                            <td>john@example.com</td>
+                    <tbody id="myTable">
+                        {% for res in reservations%}
+
+                        <tr class="tablec " data-href='{% url 'reservation_detail' pk=res.pk %}'>
+                            <td>{{res.pk}}</td>
+                            <td>{{res.title}}</td>
+                            <td>{{res.start_date_time}}</td>
+                            <td>{{res.created_by}}</td>
+                            <td>{% if res.is_accepted %}
+                                Accepted!
+                                {%else%}
+                                Pending Approval
+                                {% endif %}
+
+                            </td>
+                            <td>Update| Accept | Completed</td>
                         </tr>
-                        <tr>
-                            <td>Mary</td>
-                            <td>Moe</td>
-                            <td>mary@example.com</td>
-                        </tr>
-                        <tr>
-                            <td>July</td>
-                            <td>Dooley</td>
-                            <td>july@example.com</td>
-                        </tr>
+                        {% empty %}
+                        <p>No recent entries</p>
+                        {%endfor%}
+
+
                     </tbody>
                 </table>
+
+
+                <!-- end of reservation table  -->
             </div>
         </div>
     </div>
