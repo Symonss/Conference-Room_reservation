@@ -1,0 +1,137 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+
+<br>
+<div class="container">
+    <div class="card">
+        <div class="card-header">
+            Ticket No:
+            <strong>TK-{{reservation.pk}}</strong>
+            <span class="float-right"> <strong>Status:</strong>
+                {% if reservation.is_complete %}
+                <span class="badge badge-success text-white">Complete</span> </span>
+            {% else %}
+            {% if reservation.is_accepted %}
+            <span class="badge badge-success text-white">Accepted</span> </span>
+            {% else %}
+            <span class="badge badge-danger text-white">Pending {% endif %}</span>
+            </span>
+            {% endif %}
+        </div>
+        <div class="card-body">
+            <div class="row mb-4">
+                <div class="col-sm-6">
+                    <h5 class="mb-3">Starting Date & Time : <span
+                            class="text-info">{{reservation.start_date_time}}</span> </h5>
+                    <div>
+                        <strong>Title: <span class="text-info"> {{reservation.title}}</span></strong>
+                    </div><br>
+                    <div><strong>Conference Hall Booked:</strong> <br> <span
+                            class="text-info">{{ reservation.hall }}</span>
+                    </div>
+                    <br>
+                    <div> <strong>Description:</strong><br> <span class="text-info">
+                            No Description added</span>
+                    </div>
+
+                    <div> <strong>Reserved By:</strong><br> <span class="text-info">
+                            {{reservation.created_by}}</span>
+                    </div>
+
+                </div>
+                <!-- to change end date  -->
+                <div class="col-sm-6">
+                    <h5 class="mb-3">Ending time:<span class="text-info">{{reservation.end_date_time}}</span> </h5>
+                    <hr>
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-primary">Accept</button>
+
+                    </div>
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-primary">Reject</button>
+
+                    </div>
+                    {% if reservation.is_complete%}
+                    {% else %}
+                    <div class="btn-group">
+                        <a class="btn btn-default" href="{% url 'reservation_complete' pk=reservation.pk %}">Mark
+                            Complete</a>
+
+                    </div>
+                    {% endif %}
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-primary">Re-Schedule</button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+
+            <!-- if user is stuff and job is pending show the take job button -->
+            {% if request.user.is_support %}
+            {% if ticket.is_pending%}
+            <div class="btn-group">
+                <a class="btn btn-default" href="{% url 'take_ticket' pk=ticket.pk %}">Take Job</a>
+
+            </div>
+            {% endif %}
+            {% endif %}
+
+            <!-- if user is director allow him to change stuff incharge of the ticket -->
+
+            {% if request.user.is_director %}
+            <div class="btn-group">
+                <button type="button" class="btn btn-primary">Re-asign</button>
+
+            </div>
+            {% endif %}
+
+            {% if ticket.is_progress %}
+            <div class="btn-group">
+                <a class="btn btn-default" href="{% url 'ticket_complete' pk=ticket.pk %}">Mark Complete</a>
+
+            </div>
+
+            {% endif %}
+
+
+
+            {% if ticket.is_pending %}
+            <div class="btn-group">
+                <a class="btn btn-default" href="{% url 'ticket_complete' pk=ticket.pk %}">Mark Complete</a>
+
+            </div>
+            {% endif %}
+
+            {% if ticket.is_complete %}
+            <div class="btn-group">
+                <a class="btn btn-default" href="{% url 'ticket_reopening' pk=ticket.pk %}">Re-Open</a>
+
+            </div>
+            {% endif %}
+
+            <!-- to add team working with person who took job -->
+            {% if ticket.is_progress %}
+
+            <div class="btn-group">
+                <a class="btn btn-default" href="{% url 't_update' pk=ticket.pk %}">Add team</a>
+
+            </div>
+
+            {% endif %}
+            <br>
+        </div>
+    </div>
+
+
+
+
+</div>
+
+<br>
+{% endblock %}

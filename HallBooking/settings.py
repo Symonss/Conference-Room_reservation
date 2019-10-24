@@ -13,7 +13,7 @@ SECRET_KEY = '1r1*7$w4a!4u*s^hiyazjr2=d8yzu5n&@o4=ov30cxqj$dk&og'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['roomreserved.pythonanywhere.com','*']
 
 
 # Application definition
