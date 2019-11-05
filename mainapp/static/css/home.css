@@ -1,0 +1,96 @@
+body, html {
+    
+    height: 100%;
+  }
+ /* Style all font awesome icons */
+ .fa {
+  padding: 20px;
+  font-size: 30px;
+  width: 50px;
+  text-align: center;
+  text-decoration: none;
+}
+
+/* Add a hover effect if you want */
+.fa:hover {
+  opacity: 0.7;
+}
+p{
+  color: white;
+}
+/* Style the button and place it in the middle of the container/image */
+.btn {
+
+  background-color:rgb(93, 93, 236);
+  color: white;
+  font-size: 16px;
+  padding: 12px 24px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+}
+.btn:hover {
+  background-color: black;
+}
+h2{
+font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+color:#0040ff;
+}
+
+
+/* Facebook */
+.fa-facebook {
+  background: #3B5998;
+  color: white;
+}
+
+/* Twitter */
+.fa-twitter {
+  background: #55ACEE;
+  color: white;
+} 
+/* styling instagram */
+.fa-instagram {
+  background: #55ACEE;
+  color: white;
+}
+.card-body{
+  background-color: lavender ;
+}
+/* }
+styling of number of departments cards*/
+#dept1{
+  background-color:#d2735d;
+  margin-right: 20px;
+  margin-left: 20px;
+}
+#dept{
+  height: 20px;
+}
+
+/* styling of number of suport personel card */
+#support{
+  background-color:lavenderblush; 
+  margin-right: 20px;
+}
+/* styling  closed tickets card*/
+#closed{
+  background-color:#5DBCD2 ;
+  margin-right: 20px;
+}
+/* styling complete row */
+.tablec{
+  background-color:#5DBCD2 ;
+}
+/* styling in progress row */
+.tablep{
+  background-color: white;
+}
+/* styling pending row */
+.tablepe{
+  background-color: #d2735d;
+}
+
+
+
+
