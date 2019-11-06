@@ -2,7 +2,7 @@ from django.contrib.auth import login
 from django.shortcuts import redirect
 from ..forms import UserSignUpForm
 from django.shortcuts import render
-from ..models import User
+from ..models import User, Reservation
 # from django.utils.decorators import method_decorator
 # from ..decorators import department_required
 from django.urls import reverse_lazy
@@ -23,10 +23,11 @@ class UserSignUpView(CreateView):
     def form_valid(self, form):
         user = form.save(commit=False)
         user = form.save()
-        # login(self.request, user)
+        login(self.request, user)
         return redirect('u_home')
     
 def home(request):
-    return render(request, 'user/user_home.html',{})
+    myreservations = Reservation.objects.filter(created_by = request.user.pk)
+    return render(request, 'user/user_home.html',{'myreservations':myreservations})
     
 
