@@ -33,6 +33,7 @@ class Reservation(models.Model):
     created_by = models.ForeignKey(User, on_delete = models.CASCADE)
     is_accepted = models.BooleanField(default = False)
     is_complete = models.BooleanField(default = False)
+    is_current = models.BooleanField(default = False)
 
     def get_absolute_url(self):
         return reverse('home')

@@ -2,204 +2,67 @@
 
 {% block content %}
 
+<div class="container ">
+    <h2>My Home Page</h2>
+    <div class="card ">
+        <div class="card-body " style="background-color:white;">
+            <!-- card body  -->
 
+            <div class="contaner">
+                <!-- Nav pills -->
+                <ul class="nav nav-tabs" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" data-toggle="pill" href="#home">Current</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="pill" href="#menu1">Past</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="pill" href="#menu2">All</a>
+                    </li>
+                </ul>
+                <hr>
+                <!-- Tab panes -->
+                <div class="tab-content" style="background-color:white;margin-bottom: 20px">
+                    <div id="home" class="conainer tab-pane ative">
 
-
-
-<div class="container-fluid  w3-card" style="background-color:lavender;">
-    <br>
-    <a href="{% url 'reservation_new'%}"><button type="button" class="btn btn-primary">Reserve Boardroom</button></a>
- 
-    <hr>
-
-    <br>
-    <!-- to search or filter -->
-    <input class="form-control" id="myInput" type="text" placeholder="Search by anything...">
-    <br>
-
-    <div class="contaner">
-
-
-        <!-- Nav pills -->
-        <ul class="nav nav-tabs" role="tablist">
-            <li class="nav-item">
-                <a class="nav-link active" data-toggle="pill" href="#home">All</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" data-toggle="pill" href="#menu1">Approved</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" data-toggle="pill" href="#menu3">Rejected</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" data-toggle="pill" href="#menu2">Complete</a>
-            </li>
-        </ul>
-
-        <!-- Tab panes -->
-        <div class="tab-content" style="background-color:white;margin-bottom: 20px">
-            <div id="home" class="conainer tab-pane active">
-
-                <table class="table table-hover">
-                    <thead>
-                        <tr>
-                          
-                            <th>Title</th>
-                            <th>Start</th>
-                            <th>End</th>
-                            <th>Created By</th>
-                            <th>Status</th>
-                         
-
-
-
-                        </tr>
-                    </thead>
-                    <tbody id="myTable">
-                        {% for ticket in tickets%}
-                        {% if ticket.opener == request.user%}
-
-                        {% if ticket.is_complete%}
-                        <tr class="tablec" data-href='{% url 'ticket_detail' pk=ticket.pk %}'>
-
-                            {% elif ticket.is_progress%}
-                        <tr class="tablep" data-href='{% url 'ticket_detail' pk=ticket.pk %}'>
-                            {%else%}
-                        <tr class="tablepe" data-href='{% url 'ticket_detail' pk=ticket.pk %}'>
-                            {% endif %}
-
-                            <td>{{ticket.track_number}}</td>
-                            <td>{{ticket.ticket_type.type_name}}</td>
-                            <td>{{ticket.open_date}}</td>
-                            <td>{{ticket.opener.username}}</td>
-                            <td>{% if ticket.is_pending %}
-                                Pending
-                                {%elif ticket.is_progress%}
-                                Progress
-                                {%else%}
-                                Complete
-                                {% endif %}
-
-                            </td>
-                            <td>{{ticket.closed_date}}</td>
-                            <td>{{ticket.closed_by}}</td>
-
-                        </tr>
-
+                        {% for reservation in myreservations %}
+                        {% if reservation.is_current%}
+                        <div class="card">
+                            <div class=" card-body " style="background-color:white;">
+                                <h4 class="card-title " style="color: rgb(34, 20, 238);">{{reservation.title}}</h4>
+                                <p class="card-text" style="color: rgb(34, 20, 238);">
+                                    <span>Start: {{reservation.start_date_time}}</span>| <span> End:
+                                        {{reservation.end_date_time}}</span></p>
+                                <a href="#" class="card-link">Delete</a>
+                                <a href="#" class="card-link">Reschedule</a>
+                                <a href="#" class="card-link">Edit</a>
+                            </div>
+                        </div>
                         {%endif%}
                         {%endfor%}
+                        <br>
+                    </div>
 
-                    </tbody>
-                </table>
+                    <div id="menu1" class="containr tab-pane fade">
+                        more here
+                    </div>
 
-                <br>
+
+                    <div id="menu2" class="continer tab-pane fade">
+                        another set
+                    </div>
+
+                </div>
 
             </div>
 
-
-            <div id="menu1" class="containr tab-pane fade">
-                <table class="table table-hover">
-                    <thead>
-                        <tr>
-                             <th>Title</th>
-                            <th>Start</th>
-                            <th>End</th>
-                            <th>Created By</th>
-                            <th>Status</th>
-
-                        </tr>
-                    </thead>
-                    <tbody id="myTable">
-                        {% for ticket in tickets%}
-                        {% if ticket.opener == request.user%}
-                        {% if ticket.is_pending %}
-                        <tr class="tablepe" data-href='{% url 'ticket_detail' pk=ticket.pk %}'>
-                            <td>{{ticket.track_number}}</td>
-                            <td>{{ticket.ticket_type.type_name}}</td>
-                            <td>{{ticket.open_date}}</td>
-                            <td>{{ticket.opener.username}}</td>
-                        </tr>
-                        {% endif %}
-                        {%endif%}
-                        {%endfor%}
-                    </tbody>
-                </table>
-                <br>
-            </div>
-
-
-            <div id="menu2" class="continer tab-pane fade">
-                <table class="table table-hover">
-                    <thead>
-                        <tr>
-                             <th>Title</th>
-                            <th>Start</th>
-                            <th>End</th>
-                            <th>Created By</th>
-                            <th>Status</th>
-
-
-                        </tr>
-                    </thead>
-                    <tbody id="myTable">
-                        {% for ticket in tickets%}
-                        {% if ticket.opener == request.user%}
-                        {% if ticket.is_progress %}
-                        <tr class="tablep" data-href='{% url 'ticket_detail' pk=ticket.pk %}'>
-                            <td>{{ticket.track_number}}</td>
-                            <td>{{ticket.ticket_type.type_name}}</td>
-                            <td>{{ticket.open_date}}</td>
-                            <td>{{ticket.opener.username}}</td>
-                            <td>{{ticket.taken_by.username}}</td>
-                        </tr>
-                        {%endif%}
-                        {% endif %}
-                        {%endfor%}
-                    </tbody>
-                </table>
-                <br>
-            </div>
-
-
-            <div id="menu3" class="contaier tab-pane fade">
-                <table class="table table-hover">
-                    <thead>
-                        <tr>
-                            <th>Title</th>
-                            <th>Start</th>
-                            <th>End</th>
-                            <th>Created By</th>
-                            <th>Status</th>
-
-                        </tr>
-                    </thead>
-                    <tbody id="myTable">
-                        {% for ticket in tickets%}
-                        {% if ticket.opener == request.user%}
-                        {% if ticket.is_complete %}
-                        <tr class="tablec" data-href='{% url 'ticket_detail' pk=ticket.pk %}'>
-                            <td>{{ticket.track_number}}</td>
-                            <td>{{ticket.ticket_type.type_name}}</td>
-                            <td>{{ticket.open_date}}</td>
-                            <td>{{ticket.opener.username}}</td>
-                            <td>{{ticket.closed_date}}</td>
-                            <td>{{ticket.taken_by.username}}</td>
-                            <td>{{ticket.closed_by.username}}</td>
-                        </tr>
-                        {%endif%}
-                        {% endif %}
-                        {%endfor%}
-                    </tbody>
-                </table>
-                <br>
-            </div>
-
+            <!-- end of card body  -->
         </div>
-
-
     </div>
 </div>
-<br>
+
+
 </div>
 
 
