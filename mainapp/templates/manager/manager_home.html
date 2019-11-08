@@ -1,327 +1,135 @@
-{% extends "manager/base.html" %}
+{% extends "base.html" %}
+{% load static %}
 
 {% block content %}
-<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
-<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-<!------ Include the above in your HEAD tag ---------->
 
-<link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
-
-<div class="container-fluid  w3-card">
-
+<div class="container-fluid">
     <div class="row">
-        <div class="col-sm-2 " style="background-color:lavender;">
-            <div class="container">
-                <h2>Dashboard</h2>
-                <ul class="nav flex-column text-info">
-                    <li class="nav-item">
-                        <a class="nav-link btn btn-primary btn-block" href="#" style="margin-bottom: 10px">Viw
-                            Tickets</a>
-                    </li>
+        <div class="col-sm-3" style="background-color: rgba(95, 158, 160, 0.726);;">
 
+            <div class="container " style="background-color: rgba(95, 158, 160, 0.753);">
 
-                    <!-- trial -->
-
-                    <div class="dropdown">
-                        <button type="button" class="btn btn-primary btn-block dropdown-toggle" data-toggle="dropdown"
-                            style="margin-bottom: 10px">
-                            Manage Users
-                        </button>
-                        <div class="dropdown-menu">
-                            <a class="dropdown-item btn btn-primary btn-block" href="{% url 'support_signup'%}">Add New
-                                Stuff</a>
-                            <a class="dropdown-item" href="{% url 'department_signup'%}">Add New Department</a>
-                            <a class="dropdown-item" href="#">View All users</a>
-                            <a class="dropdown-item" href="#">View All Departments</a>
-                        </div>
+                <div class="media borer  p-3" style="background-color: rgba(24, 141, 161, 0.767);">
+                    <img src="{% static 'images/administrator.png'%}" alt="John Doe" class="mr-3 mt-3 rounded-circle"
+                        style="width:60px;">
+                    <div class="media-body">
+                        <h4>{{ request.user.full_name}} <br><small><i>Manager : {{hall_in}}</i></small></h4>
+                        <h6>0792799958</h6>
                     </div>
+                </div>
 
-
+                <h2>Quick Actions</h2>
+                <ul class="nav flex-column">
                     <li class="nav-item">
-                        <a class="nav-link btn btn-primary btn-block" href="{% url 'reservation_new'%}"
-                            style="margin-bottom: 10px">Reserve Boardroom</a>
+                        <a class="nav-link" href="#">Update Room Details</a>
                     </li>
-
                     <li class="nav-item">
-                        <a class="nav-link  btn btn-primary btn-block disabled text-white" href="#"
-                            style="margin-bottom: 10px">View
-                            Analytics </a>
+                        <a class="nav-link" href="#">Update Profile</a>
                     </li>
-
-
                     <li class="nav-item">
-                        <a class="nav-link btn text-white btn-primary btn-block disabled" href="#"
-                            style="margin-bottom: 10px">Download
-                            Reports</a>
+                        <a class="nav-link" href="#">Logout</a>
                     </li>
-
                     <li class="nav-item">
-                        <a class="nav-link btn btn-primary btn-block" href="#" style="margin-bottom: 10px">Add New
-                            Ticket Type</a>
+                        <a class="nav-link disabled" href="#">Add Users</a>
                     </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link btn btn-primary btn-block" href="{% url 'logout' %}"
-                            style="margin-bottom: 10px">Logout</a>
-                    </li>
-
                 </ul>
-
-
             </div>
+
         </div>
+        <div class="col-sm-9" style="background-color:lavnderblush;">
+            <h2 class="text-center">Current Reservations For {{ hall_in}}</h2>
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Start</th>
+                        <th>End</th>
+                        <th>User</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for r in reservations %}
+                    {% if r.is_current%}
+                    <tr>
+                        <td>{{r.title}}</td>
+                        <td>{{r.start_date_time}}</td>
+                        <td>{{r.end_date_time}}</td>
+                        <td>{{r.created_by}}</td>
+                        <td> {%if r.is_accepted%}
+                            <img src="{% static 'images/reschedule.png'%}" width="25" alt="">
+                            {% else%}
+                            <img src="{% static 'images/accept.png'%}" width="25" alt="">
+                            {% endif%}|
+                            <img src="{% static 'images/completee.png'%}" width="25" alt="">|
+                            <img src="{% static 'images/reschedule.png'%}" width="25" alt="">|
+                            <img src="{% static 'images/close.png'%}" width="25" alt="">
+                        </td>
+                    </tr>
+                    {% endif%}
+                    {% endfor%}
+                </tbody>
+            </table>
 
-        <div class="col-sm-10" style="background-color:lavender;">
-            <br>
-            <div class="row">
-                <div id="dept1" class="col-sm-3 w3-card">
-                    <div class="media borde p-3">
-                        <h1><i class="fas fa-users" class="mr-3 mt-3  rounded-circle"
-                                style="width:60px;color: aquamarine"></i>
-                        </h1>
-                        <div class="media-body">
-                            <h4>19840 <small><i> <br> Departments</i></small></h4>
+            <div class="containr">
+                <div id="accordion">
 
+                    <div class="card">
+                        <div class="card-header">
+                            <a class="collapsed card-link" data-toggle="collapse" href="#collapseTwo">
+                                Hall Details
+                            </a>
+                        </div>
+                        <div id="collapseTwo" class="collapse show" data-parent="#accordion">
+                            <div class="card-body">
+                                Comming Soon!
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-sm-3 w3-card" style="background-color:lavenderblush; margin-right: 20px">
-                    <div class="media borde p-3">
-                        <h1><i class="fas fa-users" class="mr-3 mt-3  rounded-circle"
-                                style="width:60px;color: aquamarine"></i>
-                        </h1>
-                        <div class="media-body">
-                            <h4>19840 <small><i> <br> Tickets in Progress</i></small></h4>
-
+                    <br>
+                    <div class="card">
+                        <div class="card-header">
+                            <a class="card-link" data-toggle="collapse" href="#collapseOne">
+                                Past Reservations
+                            </a>
+                        </div>
+                        <div id="collapseOne" class="collapse " data-parent="#accordion">
+                            <div class="card-body">
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>Title</th>
+                                            <th>Start</th>
+                                            <th>End</th>
+                                            <th>User</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for r in reservations %}
+                                        {% if r.is_complete%}
+                                        <tr>
+                                            <td>{{r.title}}</td>
+                                            <td>{{r.start_date_time}}</td>
+                                            <td>{{r.end_date_time}}</td>
+                                            <td>{{r.created_by}}</td>
+                                            <td><img src="{% static 'images/close.png'%}" width="25" alt=""></td>
+                                        </tr>
+                                        {% endif%}
+                                        {% endfor%}
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div id="closed" class="col-sm-3 w3-card">
-                    <div class="media borde p-3">
-                        <h1><i class="fas fa-users" class="mr-3 mt-3  rounded-circle"
-                                style="width:60px;color: aquamarine"></i>
-                        </h1>
-                        <div class="media-body">
-                            <h4>19840 <small><i> <br> Tickets Pending</i></small></h4>
-
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-2 w3-card" style="background-color:lavenderblush;">
-                    <div class="media borde p-3">
-                        <h1><i class="fas fa-users" class="mr-3 mt-3  rounded-circle"
-                                style="width:60px;color: aquamarine"></i>
-                        </h1>
-                        <div class="media-body">
-                            <h4>40 <small><i> <br>Support Team</i></small></h4>
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <br>
-            <!-- to search or filter -->
-            <input class="form-control" id="myInput" type="text" placeholder="Search by anything...">
-            <br>
-
-              <!-- Nav tabs -->
-            <ul class="nav nav-tabs" role="tablist" style="background-color:lavender;">
-                <li class="nav-item">
-                    <a class="nav-link active" data-toggle="tab" href="#home">All Tickets</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" data-toggle="tab" href="#menu1">Pending</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" data-toggle="tab" href="#menu2">In Progress</a>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link" data-toggle="tab" href="#menu3">Complete</a>
-                </li>
-
-
-            </ul>
-
-            <!-- Tab panes -->
-            <div class="tab-content" style="background-color:white;margin-bottom: 20px">
-                <div id="home" class="container tab-pane active">
-
-                    <table class="table table-hover">
-                        <thead>
-                            <tr>
-                                <th>Ticket No.</th>
-                                <th>Type</th>
-                                <th>Open Date</th>
-                                <th>Dept</th>
-                                <th>Status</th>
-                                <th>Closed On</th>
-                                <th>Done By</th>
-
-
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {% for ticket in tickets%}
-                            {% if ticket.is_complete%}
-                            <tr class="tablec" data-href='{% url 'ticket_detail' pk=ticket.pk %}'>
-
-                                {% elif ticket.is_progress%}
-                            <tr class="tablep" data-href='{% url 'ticket_detail' pk=ticket.pk %}'>
-                                {%else%}
-                            <tr class="tablepe" data-href='{% url 'ticket_detail' pk=ticket.pk %}'>
-                                {% endif %}
-                                <td>{{ticket.track_number}}</td>
-                                <td>{{ticket.ticket_type.type_name}}</td>
-                                <td>{{ticket.open_date}}</td>
-                                <td>{{ticket.opener.username}}</td>
-                                <td>{% if ticket.is_pending %}
-                                    Pending
-                                    {%elif ticket.is_progress%}
-                                    Progress
-                                    {%else%}
-                                    Complete
-                                    {% endif %}
-
-                                </td>
-                                <td>{{ticket.closed_date}}</td>
-                                <td>{{ticket.closed_by}}</td>
-                            </tr>
-                            {% empty %}
-                            <p>No recent entries</p>
-                            {%endfor%}
-                        </tbody>
-                    </table>
-
                     <br>
 
                 </div>
-
-
-                <div id="menu1" class="container tab-pane fade">
-                    <table class="table table-hover">
-                        <thead>
-                            <tr>
-                                <th>Ticket No.</th>
-                                <th>Type</th>
-                                <th>Open Date</th>
-                                <th>Dept</th>
-
-
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {% for ticket in tickets%}
-                            {% if ticket.is_pending %}
-                            {% if ticket.is_complete%}
-                            <tr class="tablec" data-href='{% url 'ticket_detail' pk=ticket.pk %}'>
-
-                                {% elif ticket.is_progress%}
-                            <tr class="tablep" data-href='{% url 'ticket_detail' pk=ticket.pk %}'>
-                                {%else%}
-                            <tr class="tablepe" data-href='{% url 'ticket_detail' pk=ticket.pk %}'>
-                                {% endif %}
-                                <td>{{ticket.track_number}}</td>
-                                <td>{{ticket.ticket_type.type_name}}</td>
-                                <td>{{ticket.open_date}}</td>
-                                <td>{{ticket.opener.username}}</td>
-                            </tr>
-                            {% endif %}
-                            {%endfor%}
-                        </tbody>
-                    </table>
-                    <br>
-                </div>
-
-
-                <div id="menu2" class="container tab-pane fade">
-                    <table class="table table-hover">
-                        <thead>
-                            <tr>
-                                <th>Ticket No.</th>
-                                <th>Type</th>
-                                <th>Open Date</th>
-                                <th>Dept</th>
-                                <th>Taken By</th>
-
-
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {% for ticket in tickets%}
-                            {% if ticket.is_progress %}
-                            {% if ticket.is_complete%}
-                            <tr class="tablec" data-href='{% url 'ticket_detail' pk=ticket.pk %}'>
-
-                                {% elif ticket.is_progress%}
-                            <tr class="tablep" data-href='{% url 'ticket_detail' pk=ticket.pk %}'>
-                                {%else%}
-                            <tr class="tablepe" data-href='{% url 'ticket_detail' pk=ticket.pk %}'>
-                                {% endif %}
-                                <td>{{ticket.track_number}}</td>
-                                <td>{{ticket.ticket_type.type_name}}</td>
-                                <td>{{ticket.open_date}}</td>
-                                <td>{{ticket.opener.username}}</td>
-                                <td>{{ticket.taken_by.username}}</td>
-                            </tr>
-                            {% endif %}
-                            {%endfor%}
-                        </tbody>
-                    </table>
-                    <br>
-                </div>
-
-
-                <div id="menu3" class="container tab-pane fade">
-                    <table class="table table-hover">
-                        <thead>
-                            <tr>
-                                <th>Ticket No.</th>
-                                <th>Type</th>
-                                <th>Open Date</th>
-                                <th>Dept</th>
-                                <th>Closed On</th>
-                                <th>Done By</th>
-                                <th>Closed By</th>
-
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {% for ticket in tickets%}
-                            {% if ticket.is_complete %}
-                            {% if ticket.is_complete%}
-                            <tr class="tablec" data-href='{% url 'ticket_detail' pk=ticket.pk %}'>
-
-                                {% elif ticket.is_progress%}
-                            <tr class="tablep" data-href='{% url 'ticket_detail' pk=ticket.pk %}'>
-                                {%else%}
-                            <tr class="tablepe" data-href='{% url 'ticket_detail' pk=ticket.pk %}'>
-                                {% endif %}
-                                <td>{{ticket.track_number}}</td>
-                                <td>{{ticket.ticket_type.type_name}}</td>
-                                <td>{{ticket.open_date}}</td>
-                                <td>{{ticket.opener.username}}</td>
-                                <td>{{ticket.closed_date}}</td>
-                                <td>{{ticket.taken_by.username}}</td>
-                                <td>{{ticket.closed_by.username}}</td>
-
-                            </tr>
-                            {% endif %}
-                            {%endfor%}
-                        </tbody>
-                    </table>
-                    <br>
-                </div>
-
             </div>
 
 
         </div>
     </div>
-
 </div>
-<br>
-<br>
+
 {% endblock %}

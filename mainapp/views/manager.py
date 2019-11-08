@@ -30,5 +30,5 @@ def home(request):
     reservations = Reservation.objects.filter(hall = hall_in.pk).order_by('-start_date_time')
 
    
-    return render(request,'manager/manager_home.html',{'reservations':reservations})
+    return render(request,'manager/manager_home.html',{'reservations':reservations,'hall_in':hall_in})
     
