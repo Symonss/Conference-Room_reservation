@@ -1,13 +1,16 @@
 {% extends "base.html" %}
-
+{% load static %}
 {% block content %}
 
 <div class="container ">
-    <h2>My Home Page</h2>
+    <br>
+    <h2 style="float: left;margin-right:40px ">My Home Page </h2>
+    <button type="button" class="btn btn-success">Book a Boardroom</button>
+    <br>
+    <br>
     <div class="card ">
         <div class="card-body " style="background-color:white;">
             <!-- card body  -->
-
             <div class="contaner">
                 <!-- Nav pills -->
                 <ul class="nav nav-tabs" role="tablist">
@@ -21,36 +24,91 @@
                         <a class="nav-link" data-toggle="pill" href="#menu2">All</a>
                     </li>
                 </ul>
-                <hr>
+
                 <!-- Tab panes -->
                 <div class="tab-content" style="background-color:white;margin-bottom: 20px">
                     <div id="home" class="conainer tab-pane ative">
 
                         {% for reservation in myreservations %}
                         {% if reservation.is_current%}
+                        <br>
                         <div class="card">
-                            <div class=" card-body " style="background-color:white;">
-                                <h4 class="card-title " style="color: rgb(34, 20, 238);">{{reservation.title}}</h4>
-                                <p class="card-text" style="color: rgb(34, 20, 238);">
-                                    <span>Start: {{reservation.start_date_time}}</span>| <span> End:
-                                        {{reservation.end_date_time}}</span></p>
+                            <div class=" card-body " style="background-color:rgb(249, 255, 251);">
+                                <h4 class="card-title " style="color: rgba(87, 87, 88, 0.801);">
+                                    {{reservation.title}}
+                                    <span><img src="{% static 'images/sphere.png'%}" width="25" alt=""></span>
+                                </h4>
+                                <p class="card-text" style="color: rgb(37, 36, 43);">
+                                    Start: <span style="color: rgb(34, 20, 238);">{{reservation.start_date_time}}</span>
+                                    | End:
+                                    <span style="color: rgb(34, 20, 238);"> {{reservation.end_date_time}}</span></p>
+                                <p style="color: rgb(34, 20, 238);">By:{{reservation.created_by}} |
+                                    Hall:{{reservation.hall}}</p>
                                 <a href="#" class="card-link">Delete</a>
                                 <a href="#" class="card-link">Reschedule</a>
                                 <a href="#" class="card-link">Edit</a>
                             </div>
                         </div>
+                        <br>
                         {%endif%}
                         {%endfor%}
                         <br>
                     </div>
 
                     <div id="menu1" class="containr tab-pane fade">
-                        more here
+
+                        {% for reservation in myreservations %}
+                        {% if reservation.is_complete %}
+                        <br>
+                        <div class="card">
+                            <div class=" card-body " style="background-color:rgb(249, 255, 251);">
+                                <h4 class="card-title " style="color: rgba(87, 87, 88, 0.801);">
+                                    {{reservation.title}}
+                                    <span><img src="{% static 'images/complete.png'%}" width="25" alt=""></span>
+                                </h4>
+                                <p class="card-text" style="color: rgb(37, 36, 43);">
+                                    Start: <span
+                                        style="color: rgb(34, 20, 238);">{{reservation.start_date_time}}</span>|
+                                    End:
+                                    <span style="color: rgb(34, 20, 238);"> {{reservation.end_date_time}}</span></p>
+
+                                <p style="color: rgb(34, 20, 238);">By:{{reservation.created_by}}|
+                                    Hall:{{reservation.hall}}</p>
+                                <a href="#" class="card-link">Delete</a>
+                            </div>
+                        </div>
+                        <br>
+                        {%endif%}
+                        {%endfor%}
+                        <br>
+
+
                     </div>
 
 
                     <div id="menu2" class="continer tab-pane fade">
-                        another set
+                        {% for reservation in myreservations %}
+                        <br>
+                        <div class="card">
+                            <div class=" card-body " style="background-color:rgb(249, 255, 251);">
+                                <h4 class="card-title " style="color: rgba(87, 87, 88, 0.801);">
+                                    {{reservation.title}}
+                                    <span><img {% if reservation.is_current %} src="{% static 'images/sphere.png'%}"
+                                            {% else %} src="{% static 'images/complete.png' %}" {% endif %} width="25"
+                                            alt=""></span>
+                                </h4>
+                                <p class="card-text" style="color: rgb(37, 36, 43);">
+                                    Start: <span
+                                        style="color: rgb(34, 20, 238);">{{reservation.start_date_time}}</span>|
+                                    End:
+                                    <span style="color: rgb(34, 20, 238);"> {{reservation.end_date_time}}</span></p>
+
+                                <p style="color: rgb(34, 20, 238);">By:{{reservation.created_by}}|
+                                    Hall:{{reservation.hall}}</p>
+                                <a href="#" class="card-link">Delete</a>
+                            </div>
+                        </div>
+                        {%endfor%}
                     </div>
 
                 </div>
@@ -62,10 +120,6 @@
     </div>
 </div>
 
-
 </div>
-
-
-
 
 {% endblock %}

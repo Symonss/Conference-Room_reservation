@@ -21,7 +21,7 @@ p{
 /* Style the button and place it in the middle of the container/image */
 .btn {
 
-  background-color:rgb(93, 93, 236);
+  background-color:rgb(32, 99, 15);
   color: white;
   font-size: 16px;
   padding: 12px 24px;
@@ -30,7 +30,7 @@ p{
   border-radius: 5px;
 }
 .btn:hover {
-  background-color: black;
+  background-color: rgb(113, 163, 240);
 }
 h2{
 font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
