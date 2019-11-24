@@ -5,18 +5,15 @@
 
 <div class="container-fluid">
     <div class="row">
-        <div class="col-sm-3" style="background-color: rgba(95, 158, 160, 0.726);;">
+        <div class="col-sm-3" style="background-color: rgba(95, 158, 160, 0.753);">
 
             <div class="container " style="background-color: rgba(95, 158, 160, 0.753);">
 
-                <div class="media borer  p-3" style="background-color: rgba(24, 141, 161, 0.767);">
+                <div class="media borer  p-3" style="background-color: rgba(95, 158, 160, 0.753);">
                     <img src="{% static 'images/administrator.png'%}" alt="John Doe" class="mr-3 mt-3 rounded-circle"
                         style="width:60px;">
 
                 </div>
-                {% for m in managers %}
-                {{m.id}}
-                {% endfor %}
 
                 <h2>Actions</h2>
                 <ul class="nav flex-column">
@@ -25,16 +22,16 @@
                         <a class="nav-link" href="#">Update Profile</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Manage managers</a>
+                        <a class="nav-link" href="{% url 'manager_signup'%}">New Managers</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'reservation_new'%}">Book a boardroom</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Manage Boardrooms</a>
+                        <a class="nav-link" href="{% url 'hall_c'%}">New Boardroom</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Manage Department</a>
+                        <a class="nav-link" href="{% url 'user_signup' %}">New Department</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'logout' %}">Logout</a>
@@ -115,85 +112,82 @@
 
             </div>
             <h3 class="text-center">Other Sumeries</h3>
+            <hr>
             <!-- The other details -->
-            <div class="row">
+            <div class="container-fliud">
+                <div class="row" style="margin-bottom: 10px;">
 
-                <!-- boardrooms  -->
-                <div class="col-sm-6" style="margin-bottom:10px">
-                    <div class="contaier ">
-                        <h2>Boad Rooms</h2>
-                        <ul class="list-group ">
-                            <li class="list-group-item ">
+                    <!-- boardrooms  -->
+                    <div class="col-sm-6" style="margin-bottom:10px;background-color:rgba(205, 243, 207, 0.788);">
+                        <div class="contaier ">
+                            <h2>Boad Rooms</h2>
+                            <ul class="list-group ">
+                                {% for h in halls%}
+                                <li class="list-group-item ">
 
-                                <div class="card border-0">
-                                    <div class="card-body bg-white">
-                                        <h4 class="card-title mt-0">Room $00 <span class="badge badge-success">47
-                                                Reservations</span></h4>
-                                        <p class="text-dark">Description: located in second floor wing B</p>
+                                    <div class="card border-0">
+                                        <div class="card-body bg-white">
+                                            <h4 class="card-title mt-0">{{h.hall_name}}|{{h.hall_abr}} <span
+                                                    class="badge badge-info">47
+                                                    Reservations</span></h4>
+                                            <p class="text-dark">Description: located in second floor wing B</p>
 
-                                        <a href="#" class="card-link">Screen</a>
-                                        <a href="#" class="card-link">26 seats</a>
-                                        <a href="#" class="card-link">Projector</a>
-                                        <a href="#" class="card-link">White Board</a>
-                                        <h5>Manager: Symons</h5>
+                                            <a href="#" class="card-link">Screen</a>
+                                            <a href="#" class="card-link">26 seats</a>
+                                            <a href="#" class="card-link">Projector</a>
+                                            <a href="#" class="card-link">White Board</a>
+                                            <h5>Manager: {{h.hall_manager}}</h5>
+                                        </div>
                                     </div>
-                                </div>
-                            </li>
-
-                            <li class="list-group-item">Second item</li>
-                            <li class="list-group-item">Third item</li>
-                        </ul>
-                    </div>
-                    <br>
-                </div>
-
-                <!-- end of board rooms -->
-
-                <!-- managers  -->
-                <div class="col-sm-6" style="background-color:lavenderblush;">
-                    <div class="contaier ">
-                        <h2>Managers</h2>
-                        <ul class="list-group ">
-
-                            <li class="list-group-item">Second item</li>
-                            <li class="list-group-item">Third item</li>
-                        </ul>
-                    </div>
-                </div>
-                <!-- end of managers  -->
-
-                <!-- departments -->
-                <div class="col-sm-6" style="background-color:lavenderblush;">
-
-
-                    <div class="contier ">
-                        <h2>Departments</h2>
-                        <ul class="list-group ">
-
-                            <li class="list-group-item">Second item</li>
-                            <li class="list-group-item">Third item</li>
-                        </ul>
+                                </li>
+                                <br>
+                                {% endfor%}
+                            </ul>
+                        </div>
+                        <br>
                     </div>
 
-                </div>
+                    <!-- end of board rooms -->
 
-                <!-- end of departments -->
-                <div class="col-sm-6" style="background-color:lavenderblush;">
+                    <!-- managers  -->
+                    <div class="col-sm-6" style="background-color:rgb(230, 222, 225);">
 
-                    <div class="contaier ">
-                        <h2>Usefull info</h2>
-                        <ul class="list-group ">
+                        <div class="contaier ">
+                            <h2>Managers</h2>
+                            <ul class="list-group ">
+                                {% for manager in managers%}
+                                <li class="list-group-item" style="margin-bottom: 2px;">{{manager.full_name}} |
+                                    {{manager.email}} <br>
+                                    <strong>Managing:</strong> {{manager.managing}} | <strong class="text-info">View
+                                        Full
+                                        Profile</strong> <br> <strong> Last seen: {{manager.last_login}} | SEND
+                                        MESSAGE</strong>
+                                </li>
+                                {% endfor%}
 
-                            <li class="list-group-item">Second item</li>
-                            <li class="list-group-item">Third item</li>
-                        </ul>
+                            </ul>
+                        </div>
+
+                        <div class="contier ">
+                            <h2>Departments</h2>
+                            <ul class="list-group ">
+                                {% for d in departments %}
+                                <li class="list-group-item">{{d.department_name}}</li>
+                                {% endfor%}
+
+                            </ul>
+                        </div>
+
+
+
                     </div>
+                    <!-- end of managers  -->
+
 
                 </div>
-
             </div>
             <br>
-            <p class="text-dark text-center">Developed by Symons</p>
+            <p class="text-dark text-center bg-blue">Developed by Symons</p>
             <!-- end of other details  -->
 
 

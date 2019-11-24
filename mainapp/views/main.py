@@ -20,13 +20,10 @@ def home(request):
 class HallCreateView(CreateView):
     model = Halls
     fields = ('hall_name','hall_abr','hall_manager')
-    template_name = 'app/hall_form.html'
+    template_name = 'app/reserve.html'
 
     def form_valid(self, form):
         hall = form.save(commit=False)
-        
-        hall.organization = self.request.user.org_owner
-        
         hall.save()
         # messages.success(self.request, 'Ticket Succesfully Created!')
         return redirect('a_home')

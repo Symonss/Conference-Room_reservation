@@ -11,17 +11,18 @@ class User(AbstractUser):
     is_admin_u = models.BooleanField(default=False)
     is_manager = models.BooleanField(default = False)
     is_user =models.BooleanField(default = False)
-    full_name = models.CharField(max_length=100)
-    email = models.EmailField(max_length=254)
-    
+    full_name = models.CharField(max_length=100, null = True, blank = True, default = 'No Name')
+    email = models.EmailField(max_length=254, null = True, blank =True)
+    department_name = models.CharField(max_length=100,  null = True, blank = True)
+
     def __str__(self):
         return self.full_name
 
 class Halls(models.Model):
     hall_name = models.CharField(max_length= 100)
     hall_abr = models.CharField(max_length= 100)
-    hall_manager = models.ForeignKey(User,on_delete=models.CASCADE)
-    
+    hall_manager = models.OneToOneField(User,on_delete=models.CASCADE, related_name ='managing')
+
         
     def __str__(self):
         return self.hall_name

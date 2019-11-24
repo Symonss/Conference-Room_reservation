@@ -29,13 +29,14 @@ class Admin_uSignUpView(CreateView):
 def home(request):
     reservations = Reservation.objects.all()
     managers = User.objects.filter(is_manager = True)
-    deparments = User.objects.filter(is_user = True)
+    departments = User.objects.filter(is_user = True)
     halls = Halls.objects.all()
     context = {
             'reservations': reservations,
             'managers': managers,
             'halls': halls,
+            'departments':departments,
         }
-
+    
     return render(request,'admin/admin_home.html', context)
     
