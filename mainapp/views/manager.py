@@ -24,11 +24,9 @@ class ManagerSignUpView(CreateView):
         user = form.save()
         # login(self.request, user)
         return redirect('m_home')
-
 def home(request):
     hall_in = Halls.objects.get(hall_manager = request.user.pk)
     reservations = Reservation.objects.filter(hall = hall_in.pk).order_by('-start_date_time')
 
-   
+
     return render(request,'manager/manager_home.html',{'reservations':reservations,'hall_in':hall_in})
-    

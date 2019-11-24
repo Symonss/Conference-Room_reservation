@@ -12,33 +12,36 @@
                 <div class="media borer  p-3" style="background-color: rgba(24, 141, 161, 0.767);">
                     <img src="{% static 'images/administrator.png'%}" alt="John Doe" class="mr-3 mt-3 rounded-circle"
                         style="width:60px;">
-                    <div class="media-body">
-                        <h4>{{ request.user.full_name}} <br><small><i>Manager : {{hall_in}}</i></small></h4>
-                        <h6>0792799958</h6>
-                    </div>
+                   
                 </div>
 
-                <h2>Quick Actions</h2>
+                <h2>Actions</h2>
                 <ul class="nav flex-column">
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Update Room Details</a>
-                    </li>
+                    
                     <li class="nav-item">
                         <a class="nav-link" href="#">Update Profile</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Manage managers</a>
                     </li>
                     <li class="nav-item"> 
                     <a class="nav-link" href="{% url 'reservation_new'%}">Book a boardroom</a>
                     </li>
+                   <li class="nav-item">
+                        <a class="nav-link" href="#">Manage Boardrooms</a>
+                    </li>
                     <li class="nav-item">
+                        <a class="nav-link" href="#">Manage Department</a>
+                    </li>
+                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'logout' %}">Logout</a>
                     </li>
-                   
                 </ul>
             </div>
 
         </div>
         <div class="col-sm-9" style="background-color:lavnderblush;">
-            <h2 class="text-center">Current Reservations For {{ hall_in}}</h2>
+            <h2 class="text-center">Reservations {{ hall_in}}</h2>
             <table class="table table-hover">
                 <thead>
                     <tr>
@@ -74,26 +77,8 @@
 
             <div class="containr">
                 <div id="accordion">
-
-                    <div class="card">
-                        <div class="card-header">
-                            <a class="collapsed card-link" data-toggle="collapse" href="#collapseTwo">
-                                Hall Details
-                            </a>
-                        </div>
-                        <div id="collapseTwo" class="collapse show" data-parent="#accordion">
-                            <div class="card-body">
-                                Comming Soon!
-                            </div>
-                        </div>
-                    </div>
-                    <br>
-                    <div class="card">
-                        <div class="card-header">
-                            <a class="card-link" data-toggle="collapse" href="#collapseOne">
-                                Past Reservations
-                            </a>
-                        </div>
+                  
+                        
                         <div id="collapseOne" class="collapse " data-parent="#accordion">
                             <div class="card-body">
                                 <table class="table table-hover">
