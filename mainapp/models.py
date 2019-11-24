@@ -21,6 +21,7 @@ class Halls(models.Model):
     hall_name = models.CharField(max_length= 100)
     hall_abr = models.CharField(max_length= 100)
     hall_manager = models.ForeignKey(User,on_delete=models.CASCADE)
+    
         
     def __str__(self):
         return self.hall_name

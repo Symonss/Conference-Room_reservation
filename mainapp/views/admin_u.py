@@ -2,7 +2,7 @@ from django.contrib.auth import login
 from django.shortcuts import redirect
 from ..forms import Admin_uSignUpForm
 from django.shortcuts import render
-from ..models import User
+from ..models import User, Reservation, Halls
 # from django.utils.decorators import method_decorator
 # from ..decorators import department_required
 from django.urls import reverse_lazy
@@ -27,5 +27,15 @@ class Admin_uSignUpView(CreateView):
         return redirect('a_home')
 
 def home(request):
-    return render(request,'admin/admin_home.html',{})
+    reservations = Reservation.objects.all()
+    managers = User.objects.filter(is_manager = True)
+    deparments = User.objects.filter(is_user = True)
+    halls = Halls.objects.all()
+    context = {
+            'reservations': reservations,
+            'managers': managers,
+            'halls': halls,
+        }
+
+    return render(request,'admin/admin_home.html', context)
     
