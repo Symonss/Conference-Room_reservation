@@ -1,5 +1,5 @@
 beautifulsoup4==4.8.1
-Django==2.0.13
+Django==2.2.24
 django-bootstrap-datepicker-plus==3.0.5
 django-bootstrap4==1.0.1
 django-crispy-forms==1.7.0
